@@ -21,6 +21,7 @@
 #include "driver/spi_master.h"
 #include "soc/gpio_struct.h"
 #include "driver/gpio.h"
+#include "weather_icon.h"
 
 #define PI 3.141593
 

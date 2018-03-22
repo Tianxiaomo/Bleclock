@@ -70,6 +70,7 @@ void Paint_DrawFilledRectangle(Paint* paint, int x0, int y0, int x1, int y1, int
 void Paint_DrawCircle(Paint* paint, int x, int y, int radius, int colored);
 void Paint_DrawFilledCircle(Paint* paint, int x, int y, int radius, int colored);
 void Paint_DrawString(Paint* paint, int x, int y,int size,const char* chs, int colored);
+void Paint_DrawImage(Paint* paint, int x, int y,int h,int w,const unsigned char* chs, int colored);
 #endif
 
 /* END OF FILE */

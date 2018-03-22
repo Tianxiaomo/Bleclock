@@ -385,19 +385,40 @@ void Paint_DrawString(Paint* paint, int x, int y,int size,const char* chs, int c
 	}
 }
 
-void Paint_DrawString(Paint* paint, int x, int y,int h,int w,const char* chs, int colored)
+void Paint_DrawImage(Paint* paint, int x, int y,int h,int w,const unsigned char* chs, int colored)
 {
-	int h_y,w_x,p;
-	for(w_x = 0;w_x < w;w_x+=8){
-		for(p= 0;p<8;p++){
-			if(chs[wx] | 1<<p){
-				Paint_DrawPixel(paint, x + w_x + p, y + h_y, colored);
+	int high,width,p;
+	for(high = 0;high < h;high++){
+		for(width = 0;width*8 < w;width++){
+			for(p= 0;p<8;p++){
+				if(width*8+p == w) break;
+				if(chs[high*7+width] << p & 0x80){
+					Paint_DrawPixel(paint, x + width*8 + p, y + high, colored);
+				}
 			}
 		}
-		if(chs[w_x/8])
 	}
-	Paint_DrawPixel(paint, x - x_pos, y + y_pos, colored);
 }
+
+//void Paint_DrawImage(int h,int w,const unsigned char* chs)
+//{
+//	int high,width,p;
+//	for(high = 0;high < h;high++){
+//		for(width = 0;width*8 < w;width++){
+//	//		printf(" %02x ",chs[high*7+width]);
+//			for(p= 0;p<8;p++){
+//				if(width*8+p == w) break;
+//				if(chs[high*7+width]>>p & 1){
+//			//	if(chs[high*7+width]<<p & 0x80){
+//					printf("#");
+//				}else{
+//					printf(" ");
+//				}
+//			}
+//		}
+//		printf("\n");
+//	}
+//}
 
 /* END OF FILE */
 

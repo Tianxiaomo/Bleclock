@@ -138,7 +138,8 @@ show_task.o: \
  /cygdrive/e/AiThinkerIDE_V0.5/cygwin/home/aithinker/project/esp32/esp32-idf/components/esp32/include/rom/lldesc.h \
  /cygdrive/e/AiThinkerIDE_V0.5/cygwin/home/aithinker/project/esp32/esp32-idf/components/esp32/include/rom/queue.h \
  /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/epdpaint.h \
- /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/imagedata.h
+ /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/imagedata.h \
+ /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/weather_icon.h
 
 /cygdrive/e/AiThinkerIDE_V0.5/cygwin/home/aithinker/project/esp32/esp32-idf/components/newlib/include/string.h:
 
@@ -417,4 +418,6 @@ show_task.o: \
 /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/epdpaint.h:
 
 /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/imagedata.h:
+
+/home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/weather_icon.h:
 /home/aithinker/project/esp32/esp32-idf/spi_master/main/./show_task.c:

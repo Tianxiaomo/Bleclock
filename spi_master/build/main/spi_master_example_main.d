@@ -95,6 +95,7 @@ spi_master_example_main.o: \
  /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/epdpaint.h \
  /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/imagedata.h \
  /home/aithinker/project/esp32/esp32-idf/spi_master/main/show_task.h \
+ /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/weather_icon.h \
  /home/aithinker/project/esp32/esp32-idf/spi_master/main/ble_task.h \
  /home/aithinker/project/esp32/esp32-idf/spi_master/main/https_request.h \
  /cygdrive/e/AiThinkerIDE_V0.5/cygwin/home/aithinker/project/esp32/esp32-idf/components/spi_flash/include/esp_spi_flash.h
@@ -288,6 +289,8 @@ spi_master_example_main.o: \
 /home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/imagedata.h:
 
 /home/aithinker/project/esp32/esp32-idf/spi_master/main/show_task.h:
+
+/home/aithinker/project/esp32/esp32-idf/spi_master/components/epaper-lib/weather_icon.h:
 
 /home/aithinker/project/esp32/esp32-idf/spi_master/main/ble_task.h:
 

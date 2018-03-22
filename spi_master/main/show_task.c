@@ -31,8 +31,8 @@ static const char *TAG = "SHOW";
 RTC_DATA_ATTR static int boot_count = 0;
 RTC_DATA_ATTR static char first = 1;
 
-#define EXAMPLE_WIFI_SSID  "LS-PC"
-#define EXAMPLE_WIFI_PASS  "092413131"
+#define EXAMPLE_WIFI_SSID  "qk365.com"
+#define EXAMPLE_WIFI_PASS  "qk365.com."
 
 typedef struct coordinate {
     int x;
@@ -97,7 +97,7 @@ static void Draw_Time(struct tm* timeinfo)
     int hour_radius = 60;
     int hour = timeinfo->tm_hour;
     int min= timeinfo->tm_min;
-    static Coordinate hour_now,hour_old,min_now,min_old;
+    RTC_DATA_ATTR static Coordinate hour_now,hour_old,min_now,min_old;
 
     printf("Redraw start!\n");
 
@@ -123,17 +123,21 @@ static void Draw_Time(struct tm* timeinfo)
 		hour_old = hour_now;
 		Draw_Hour(&paint, x, y, hour_now.x , hour_now.y, COLORED);
 	}
-	Draw_Min(&paint, x, y, min_old.x , min_old.y, UNCOLORED);
 	min_now.x = (int)(sin(min*6*PI/180) * minute_radius);
 	min_now.y = (int)(cos(min*6*PI/180) * minute_radius);
 	min_now.x = x + min_now.x;
 	min_now.y = y - min_now.y;
-	min_old = min_now;
-	Draw_Min(&paint, x, y, min_now.x , min_now.y, COLORED);
+	if(min_old.x != min_now.x || min_old.y != min_now.y){
+		Draw_Min(&paint, x, y, min_old.x , min_old.y, UNCOLORED);
+		printf("hour=%d,min=%d,hour_now=%d:%d,min_old=%d:%d,min_now=%d:%d\n",hour,min,hour_now.x,hour_now.y,min_old.x,min_old.y,min_now.x,min_now.y);
 
-	printf("hour=%d,min=%d,hour_now=%d:%d,min_now=%d:%d\n",hour,min,hour_now.x,hour_now.y,min_now.x,min_now.y);
+		min_old = min_now;
+		Draw_Min(&paint, x, y, min_now.x , min_now.y, COLORED);
+		printf("hour=%d,min=%d,hour_now=%d:%d,min_old=%d:%d,min_now=%d:%d\n",hour,min,hour_now.x,hour_now.y,min_old.x,min_old.y,min_now.x,min_now.y);
 
-	EPD_DisplayFrame(&epd, frame_buffer);
+		EPD_DisplayFrame(&epd, frame_buffer);
+	}
+
 
 //    vTaskDelete(NULL);
 }
@@ -151,8 +155,12 @@ static void show_init(void){
 	  Paint_DrawFilledCircle(&paint, 200, 150, 123, COLORED);
 	  Paint_DrawFilledCircle(&paint, 200, 150, 120, UNCOLORED);
 //	  Draw_Min(&paint,100,100, 250, 250,COLORED);
-	  Paint_DrawString(&paint, 10, 10,20,"今天夜间不太热也不太冷，风力不大，相信您在这样的天气条件下，应会感到比较清爽和舒适。", COLORED);
-	  Paint_DrawString(&paint, 10, 100,20,"abcdefjhijklmnopqrstovwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}\\|,.<>/?`~", COLORED);
+//	  Paint_DrawString(&paint, 10, 10,20,"今天夜间不太热也不太冷，风力不大，相信您在这样的天气条件下，应会感到比较清爽和舒适。", COLORED);
+	  Paint_DrawImage(&paint,350,0,50,50,gImage_100,COLORED);
+	  Paint_DrawImage(&paint,350,100,50,50,gImage_101,COLORED);
+	  Paint_DrawImage(&paint,350,200,50,50,gImage_103,COLORED);
+
+//	  Paint_DrawString(&paint, 10, 100,20,"abcdefjhijklmnopqrstovwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}\\|,.<>/?`~", COLORED);
 	  EPD_DisplayFrame(&epd, frame_buffer);
 //	  xTaskCreate(redraw, "spp_cmd_task", 2048, NULL, 10, NULL);
 }
@@ -161,7 +169,10 @@ static void show_init(void){
 void display_init()
 {
     ++boot_count;
-    show_init();
+    if(first){
+    	show_init();
+    }
+    ESP_LOGI(TAG, "first: %d", first);
     ESP_LOGI(TAG, "Boot count: %d", boot_count);
 
     time_t now;
